@@ -1,0 +1,21 @@
+
+.btn-success { background-color: #0B3954 !important; }
+.btn-secondary { background-color: #C81D25 !important; }
+.bg-danger { background-color: #087e8b !important; }
+
+
+.style1{
+    color: #C81D25;
+   font-weight: bold;
+}
+
+.style2{
+   color: #ffaa00;
+   font-weight: bold;
+
+}
+
+.style3{
+color: #28a745;
+font-weight: bold;
+}
