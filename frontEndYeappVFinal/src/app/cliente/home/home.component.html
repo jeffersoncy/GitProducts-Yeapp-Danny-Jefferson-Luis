@@ -1,0 +1,106 @@
+<div class="container" style="margin-top: 30px; margin-left: 108px; background-color: #bfd7ea; border-radius: 0.5em;">
+    <br>
+    <div class="row">
+        <div class="col-sm-8" style="text-align: center;">
+            <h1 style="color: #0b3954;">Gestion de Productos</h1>
+        </div>
+        <div class="col-sm-3" style="text-align: center; margin-top: 10px;" >
+            <h4 style="color: #0b3954;">Total de resultados: {{cantidadProd}}</h4>
+        </div>
+        <div class="col-sm-1" style="text-align: center; margin-top: 10px; color: #0b3954;"  >
+            Ver: <input type="image" src="../../../assets/Logos/image-outline.png" routerLink="/listar" routerLinkActive="active" height="30" width="30"/>
+        </div>
+    </div>
+    <br>
+</div>
+<div class="container">
+    <div class="row">
+            <div class="col-sm-10" *ngIf="categoria == 'general'; else filtro">
+                <div class="galleryHome" *ngFor="let producto of productos"
+                    style="margin-top: 20px;">
+                    <div >
+                        <br>
+                        <div class="desc " style="text-align: center;"><b>{{ producto.nomProducto}}</b> </div>
+                        <div class="imgProd"><img src="../../../assets/Productos/{{producto.rutaimagen}}" width="200px"
+                                height="150px" /></div>
+                        <div class="desc " style="text-align: center;">Código: {{ producto.id}} </div>
+                        <div class="desc " style="text-align: center;">Categoría: {{ producto.tipo}} </div>
+                        <div [ngClass]='{style1:producto.estado === "Bodega",style2:producto.estado === "Stock",style3:producto.estado === "Vendido"}' style="text-align: center;">Estado: {{producto.estado}}</div>
+                        <div class="imgProd" style="text-align: center;"><div class="imgProd" style="text-align: center;">
+                          <ngx-qrcode
+                            [elementType]="elementType"
+                            [errorCorrectionLevel]="correctionLevel"
+                            value="{{producto.id}}"
+                            cssClass="coolQRCode">
+                          </ngx-qrcode>
+                        </div></div> <br>
+                        <div class="quantity " style="display: inline">
+                            <div class="btncar" style="float:left; width:47%;  margin-left: 5px;" display="inline-block">
+                                <button  class="btn btn-success " (click)="actualizarProducto(producto)"
+                                    style="margin-left: 5px;">Actualizar producto</button>
+                            </div>
+                            <div class="btncar" style="float:right; width:47%;  margin-right: 5px;" display="inline-block">
+                                <button  class="btn btn-secondary " (click)="eliminarProducto(producto)"
+                                    style="margin-right: 5px;">Eliminar producto</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <h2 style="margin-top: 30px;">Filtros</h2>
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item ">
+                        <a class="nav-link" (click)="tipo(productos,'general')">Todos los productos</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" (click)="tipo(productos,'Televisores')">Televisores</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" (click)="tipo(productos,'Celulares')">Celulares</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="tipo(productos,'Computadores')">Computadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="tipo(productos,'Electrodomesticos')">Electrodomesticos</a>
+                    </li>
+                </ul>
+            </div>
+        <ng-template #filtro style="margin-bottom:33px">
+            <div class="col-sm-10">
+                <div class="galleryHome" *ngFor="let producto of productosfiltrado"
+                    style="margin-top: 20px;">
+                    <div >
+                        <br>
+                        <div class="desc " style="text-align: center;"><b>{{ producto.nomProducto}} </b></div>
+                        <div class="imgProd"><img src="../../../assets/Productos/{{producto.rutaimagen}}" width="200px"
+                                height="150px" /></div>
+                                <div class="desc " style="text-align: center;">Código: {{ producto.id}} </div>
+                                <div class="desc " style="text-align: center;">Categoría: {{ producto.tipo}} </div>
+                                <div [ngClass]='{style1:producto.estado === "Bodega",style2:producto.estado === "Stock",style3:producto.estado === "Vendido"}' style="text-align: center;">Estado: {{producto.estado}}</div>
+                                <div class="imgProd" style="text-align: center;">
+                                  <ngx-qrcode
+                                    [elementType]="elementType"
+                                    [errorCorrectionLevel]="correctionLevel"
+                                    value="{{producto.id}}"
+                                    cssClass="coolQRCode">
+                                  </ngx-qrcode>
+                                </div> <br>
+                        <div class="quantity " style="display: inline">
+                            <div class="btncar" style="float:left; width:47%;  margin-left: 5px;" display="inline-block">
+                                <button  class="btn btn-success " (click)="actualizarProducto(producto)"
+                                    style="margin-left: 5px;">Actualizar producto</button>
+                            </div>
+                            <div class="btncar" style="float:right; width:47%;  margin-right: 5px;" display="inline-block">
+                                <button  class="btn btn-secondary " (click)="eliminarProducto(producto)"
+                                    style="margin-right: 5px;">Eliminar producto</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
